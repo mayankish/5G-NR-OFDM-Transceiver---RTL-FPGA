@@ -6,7 +6,7 @@ This project is **Part 1 of a three-project wireless SoC portfolio** (PHY → MA
 
 ## Why this project
 
-5G modem PHY is the centre of gravity of Qualcomm's Bangalore campus. The classic interview question — *"walk me through what happens between bits at the MAC and samples at the antenna"* — has six or seven canonical answers: subcarrier mapping, IFFT, CP insertion, sync, channel estimation, equalisation, demap. This project implements each of those as a Verilog module that runs in real time on a 100 MHz Artix-7.
+5G modem PHY is the centre of gravity of modern communication system- has six or seven canonical answers: subcarrier mapping, IFFT, CP insertion, sync, channel estimation, equalisation, demap. This project implements each of those as a Verilog module that runs in real time on a 100 MHz Artix-7.
 
 The design is deliberately **a subset, not a compliant NR implementation**. The numerology is reduced (64-FFT instead of 2048), the channel codes are out of scope, and there is no CFO estimation. Each omission is called out explicitly in `docs/design_specification.md` so the boundary between what's built and what's assumed is unambiguous.
 
@@ -101,17 +101,4 @@ In scope: full TX/RX data path, NR-like sync via Zadoff-Chu, DMRS-based LS chann
 
 Out of scope (called out explicitly so an interviewer sees the boundary): CFO estimation, LDPC/polar coding, multi-antenna / MIMO, full SSB/MIB decode, AXI-Stream wrappers.
 
-## Honest caveats
 
-* Resource numbers in the headline table are **synthesis estimates** until the Vivado run on a real install. Update them once the actual report is in hand.
-* The custom FFT is sequential (in-place, ping-pong banks). For a production NR PHY you'd use a streaming radix-2² SDF pipeline (Xilinx FFT IP). The custom engine here is deliberately *the* talking point — it demonstrates DSP-hardware fluency rather than IP-instantiation skill.
-* The PSS correlator is combinational over a 63-deep tap line; at higher Fmax targets you'd pipeline it. We don't, because 100 MHz closes with margin.
-
-## Roadmap
-
-After this project lands, the next two in the wireless SoC portfolio:
-
-* **Project 2 — Wireless Sensor Network with Custom MAC Protocol** (Arduino + NRF24L01, CSMA/CA or TDMA in C++)
-* **Project 3 — UVM Verification Environment for the MAC Controller SoC IP** (Verilog RTL of the MAC, verified with a full UVM testbench)
-
-Together they form a coherent **PHY → MAC → SoC verification** narrative for the Qualcomm interview.
