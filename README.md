@@ -2,6 +2,7 @@
 
 > A synthesizable Verilog implementation of a complete OFDM transceiver modelled on a meaningful subset of 5G NR PHY, targeting the **Xilinx Artix-7 (Nexys A7, XC7A100T)**. Paired with a Python golden reference model that produces measured BER-vs-SNR curves under AWGN and TDL-C multipath.
 
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fmayankish%2F5G-NR-OFDM-Transceiver---RTL-FPGA&countColor=%23263759)
 ![Language](https://img.shields.io/badge/RTL-Verilog-blue)
 ![FPGA](https://img.shields.io/badge/FPGA-Xilinx%20Artix--7-orange)
 ![Python](https://img.shields.io/badge/Golden%20Model-Python%203-green)
